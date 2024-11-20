@@ -1,10 +1,11 @@
 sh scripts/train.sh
 
 
-CKPT_PATH=$(ls -d output/v0-*/checkpoint-* | sort -V | tail -n 1)
+CKPT_PATH=$(ls -d output/*/v0-*/checkpoint-* | sort -V | tail -n 1)
 TARGET_PATH="result/"
 
-
+# make the target path if it doesn't exist
+mkdir -p "$TARGET_PATH"
 swift infer \
 --ckpt_dir "$CKPT_PATH" \
 --val_dataset "./data/test.jsonl" \
